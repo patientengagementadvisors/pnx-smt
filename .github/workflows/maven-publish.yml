@@ -27,10 +27,7 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    # To enable publishing, add a <distributionManagement> section to your pom.xml for GitHub Packages.
-    # See: https://docs.github.com/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#publishing-a-package
-    # - name: Publish to GitHub Packages Apache Maven
-    #   run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-    #   env:
-    #     GITHUB_TOKEN: ${{ github.token }}
+    - name: Publish to GitHub Packages Apache Maven
+      run: mvn deploy -s ${{ github.workspace }}/settings.xml
+      env:
+       GITHUB_TOKEN: ${{ github.token }}
