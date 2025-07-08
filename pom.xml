@@ -6,7 +6,7 @@
 
     <groupId>org.pea</groupId>
     <artifactId>pnx-smt</artifactId>
-    <version>0.1.3-SNAPSHOT</version>
+    <version>0.1.4-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
@@ -58,19 +58,21 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>shaded</shadedClassifierName>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>org/apache/kafka/connect/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                    <filters>
-                        <filter>
-                            <artifact>*:*</artifact>
-                            <excludes>
-                                <exclude>org/apache/kafka/connect/**</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
-                </configuration>
             </plugin>
         </plugins>
     </build>
