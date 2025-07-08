@@ -17,10 +17,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 11
+    - name: Set up JDK 23
       uses: actions/setup-java@v4
       with:
-        java-version: '11'
+        java-version: '23'
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
@@ -28,7 +28,9 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+    # To enable publishing, add a <distributionManagement> section to your pom.xml for GitHub Packages.
+    # See: https://docs.github.com/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#publishing-a-package
+    # - name: Publish to GitHub Packages Apache Maven
+    #   run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+    #   env:
+    #     GITHUB_TOKEN: ${{ github.token }}
